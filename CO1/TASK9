@@ -1,0 +1,16 @@
+abstract class Vehicle {
+private final String regNo;
+protected Vehicle(String regNo) { this.regNo = regNo; }
+public String getRegNo() { return regNo; }
+protected abstract double ratePerHour();
+}
+
+interface Chargeable {
+double chargingFee(int kWh);
+default boolean supportsCharging() {
+return true;
+}
+static int standardRatePerKWh() {
+return 12;
+}
+}
