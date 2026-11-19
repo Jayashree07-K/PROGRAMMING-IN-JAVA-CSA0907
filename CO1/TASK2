@@ -1,0 +1,14 @@
+String[][] slots = new String[3][];
+slots[0] = new String[20];
+slots[1] = new String[30];
+slots[2] = new String[50];
+
+int wrongHours = 130 / 60; // 2: incorrect for started-hour billing
+int billableHours = (130 + 59) / 60; // 3
+double fee = billableHours * 30.0; // Rs 90.0
+
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter vehicle number: ");
+String vehicleNo = sc.nextLine();
+System.out.print("Enter duration in minutes: ");
+long minutes = sc.nextLong();
