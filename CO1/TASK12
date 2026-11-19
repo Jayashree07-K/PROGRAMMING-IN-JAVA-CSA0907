@@ -1,0 +1,19 @@
+interface Pass {
+boolean isValid(LocalDateTime time);
+}
+interface PricingRule {
+double fee(Vehicle vehicle, LocalDateTime in,
+LocalDateTime out);
+}
+class E_Bike extends Vehicle {
+E_Bike(String regNo) { super(regNo); }
+@Override protected double ratePerHour() { return 0; }
+double flatFee() { return 20.0; } // example; configure official rate
+}
+class DeliveryVan extends Car {
+DeliveryVan(String regNo) { super(regNo); }
+double multiplier(LocalDateTime time) {
+int h = time.getHour();
+return (h >= 9 && h < 17) ? 2.0 : 1.0;
+}
+}
