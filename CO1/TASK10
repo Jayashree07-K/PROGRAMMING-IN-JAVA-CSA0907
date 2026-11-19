@@ -1,0 +1,13 @@
+class ParkingSlot {
+private final int slotNo;
+private boolean occupied;
+ParkingSlot(int slotNo) {
+if (slotNo < 0) throw new IllegalArgumentException("Invalid slot");
+this.slotNo = slotNo;
+}
+public int getSlotNo() { return slotNo; }
+public boolean isOccupied() { return occupied; }
+public void setOccupied(boolean occupied) {
+this.occupied = occupied;
+}
+}
