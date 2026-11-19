@@ -1,0 +1,15 @@
+class Vehicle {
+private final String regNo;
+Vehicle(String regNo) { this.regNo = regNo; }
+}
+class Car extends Vehicle {
+Car(String regNo) { super(regNo); }
+}
+class ElectricCar extends Car {
+ElectricCar(String regNo) { super(regNo); }
+}
+
+new ElectricCar("TN03C3")
+1. Vehicle constructor executes through Car's super(...)
+2. Car constructor body executes
+3. ElectricCar constructor body executes
