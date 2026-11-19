@@ -1,0 +1,23 @@
+class ParkingSlot {
+int slotNo;
+boolean occupied;
+ParkingSlot() {
+this(0, false);
+}
+ParkingSlot(int slotNo, boolean occupied) {
+this.slotNo = slotNo;
+this.occupied = occupied;
+}
+}
+
+class ParkingTicket {
+long ticketNo;
+String vehicleNo;
+ParkingTicket(long ticketNo, String vehicleNo) {
+this.ticketNo = ticketNo;
+this.vehicleNo = vehicleNo;
+}
+ParkingTicket(ParkingTicket other) {
+this(other.ticketNo, other.vehicleNo);
+}
+}
