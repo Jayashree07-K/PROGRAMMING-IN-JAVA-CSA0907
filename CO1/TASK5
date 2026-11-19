@@ -1,0 +1,30 @@
+class ParkingTicket {
+private static long ticketCounter = 1000;
+private final long ticketNo;
+private final String vehicleNo;
+ParkingTicket(String vehicleNo) {
+this.ticketNo = ++ticketCounter;
+this.vehicleNo = vehicleNo;
+}
+public long getTicketNo() { return ticketNo; }
+public String getVehicleNo() { return vehicleNo; }
+}
+
+class ParkingFacility {
+private static int totalOccupancy;
+static {
+totalOccupancy = 0;
+}
+static int getTotalOccupancy() {
+return totalOccupancy;
+}
+}
+
+class ParkingFacility {
+ParkingTicket createTicket(String vehicleNo) {
+return new ParkingTicket(vehicleNo);
+}
+}
+// Example:
+// ParkingFacility p = new ParkingFacility();
+// ParkingTicket t = p.createTicket("TN01AB1111");
