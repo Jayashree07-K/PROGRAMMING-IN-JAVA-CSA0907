@@ -1,0 +1,23 @@
+abstract class Vehicle {
+protected abstract double ratePerHour();
+}
+class TwoWheeler extends Vehicle {
+@Override protected double ratePerHour() { return 10; }
+}
+class Car extends Vehicle {
+@Override protected double ratePerHour() { return 30; }
+}
+
+@Override
+public boolean equals(Object o) {
+return o instanceof Vehicle
+&& regNo.equals(((Vehicle) o).regNo);
+}
+@Override
+public int hashCode() {
+return regNo.hashCode();
+}
+@Override
+public String toString() {
+return getClass().getSimpleName() + "[" + regNo + "]";
+}
