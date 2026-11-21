@@ -1,0 +1,45 @@
+B4.1 – Migration Strategy
+
+// Core migration logic (simplified)
+int loaded = 0;
+List<String> errors = new ArrayList<>();
+List<String[]> batch = new ArrayList<>();
+
+try (BufferedReader br = Files.newBufferedReader(Path.of("passes.csv"))) {
+    String line;
+    int lineNo = 0;
+    while ((line = br.readLine()) != null) {
+        lineNo++;
+        String[] f = line.split(",", -1);
+        try {
+            if (f.length != 5 || f[0].isBlank() || f[1].isBlank()
+                    || f[2].isBlank()) throw new IllegalArgumentException("Bad fields");
+            Integer.parseInt(f[3]);
+            double amount = Double.parseDouble(f[4]);
+            if (amount < 0) throw new IllegalArgumentException("Negative amount");
+            batch.add(f);
+        } catch (RuntimeException ex) {
+            errors.add("Line " + lineNo + ": " + ex.getMessage());
+        }
+    }
+}
+loaded = PassLoader.loadAll(con, batch);
+System.out.println("Loaded: " + loaded);
+for (String e : errors) System.out.println("Rejected: " + e);
+
+This template validates each row, collects valid rows, loads them transactionally in batches and reports rejected rows. For very large files, stream validated rows into bounded batches rather than keeping the entire dataset in memory. The five-field layout matches the supplied PassStore/PassLoader example; extend it if using the full seven-field A1 design.
+
+B4.2 – Inspect the Database
+
+DatabaseMetaData md = con.getMetaData();
+System.out.println("Database: " + md.getDatabaseProductName());
+System.out.println("Database version: " + md.getDatabaseProductVersion());
+System.out.println("Driver: " + md.getDriverName());
+System.out.println("Driver version: " + md.getDriverVersion());
+
+try (ResultSet tables = md.getTables(
+        con.getCatalog(), null, "%", new String[]{"TABLE"})) {
+    while (tables.next()) {
+        System.out.println("Table: " + tables.getString("TABLE_NAME"));
+    }
+}
